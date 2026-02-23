@@ -5,204 +5,150 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Note for Jimmy</title>
 
-  <!-- More elegant fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@300;500&family=Parisienne&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Fraunces:opsz,wght@9..144,300;9..144,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@300;500&family=Parisienne&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg1:#fbf7f4;
-      --bg2:#fff;
+      --bg: #fbf7f4;
+      --ink: #262626;
+      --muted: rgba(38,38,38,.68);
 
-      --ink:#262626;
-      --muted:rgba(38,38,38,.68);
+      --paper: #fffaf4;
+      --paper-edge: rgba(0,0,0,.07);
 
-      --paper1:#fffdf9;
-      --paper2:#fff7ef;
-      --paper-edge:rgba(0,0,0,.08);
+      --envelope: #f6e8e1;
+      --envelope-2: #efd8cf;
+      --envelope-line: rgba(0,0,0,.09);
 
-      --env1:#f6e9e2;
-      --env2:#efd7cc;
-      --env-line:rgba(0,0,0,.10);
-
-      --accent:#d7a36c;      /* soft gold */
-      --rose:#c77a83;        /* rosy */
-      --wax1:#a64a5a;
-      --wax2:#8f3243;
+      --accent: #d7a36c;   /* soft gold */
+      --rose: #c77a83;     /* rosy */
+      --wax: #9b3a4a;      /* deep wax */
 
       --shadow: 0 26px 70px rgba(0,0,0,.12);
-      --shadow-soft: 0 16px 44px rgba(0,0,0,.09);
+      --shadow-soft: 0 14px 46px rgba(0,0,0,.09);
 
-      --radius: 26px;
+      --radius: 24px;
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
 
     body{
-      margin:0;
-      color:var(--ink);
+      margin: 0;
+      background:
+        radial-gradient(700px 540px at 18% 16%, rgba(199,122,131,.11), transparent 60%),
+        radial-gradient(840px 560px at 82% 82%, rgba(215,163,108,.14), transparent 62%),
+        radial-gradient(520px 380px at 50% 40%, rgba(255,255,255,.65), transparent 68%),
+        linear-gradient(180deg, var(--bg), #fff);
+      color: var(--ink);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      background:
-        radial-gradient(900px 650px at 16% 10%, rgba(199,122,131,.13), transparent 60%),
-        radial-gradient(900px 650px at 86% 85%, rgba(215,163,108,.16), transparent 58%),
-        radial-gradient(600px 420px at 55% 45%, rgba(255,255,255,.65), transparent 60%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
+      display: grid;
+      place-items: center;
+      overflow: hidden;
     }
 
-    /* Soft vignette + grain */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:-80px;
-      pointer-events:none;
-      background:
-        radial-gradient(closest-side at 50% 45%, transparent 55%, rgba(0,0,0,.06) 100%),
-        repeating-linear-gradient(0deg, rgba(0,0,0,.010) 0 1px, transparent 1px 8px);
-      opacity:.55;
-      filter: blur(.2px);
-      mix-blend-mode: multiply;
-    }
-
-    /* Sparkles + floating hearts (gimmick layer) */
+    /* Extra “pretty” ambient particles */
     .sparkle{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.55;
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .55;
+      filter: blur(.25px);
       background-image:
-        radial-gradient(circle at 12% 24%, rgba(215,163,108,.34) 0 2px, transparent 3px),
-        radial-gradient(circle at 30% 68%, rgba(199,122,131,.26) 0 2px, transparent 3px),
-        radial-gradient(circle at 75% 22%, rgba(215,163,108,.22) 0 1.8px, transparent 3px),
-        radial-gradient(circle at 70% 78%, rgba(199,122,131,.18) 0 1.6px, transparent 3px),
-        radial-gradient(circle at 50% 48%, rgba(215,163,108,.14) 0 1.4px, transparent 3px);
-      filter: blur(.15px);
+        radial-gradient(circle at 12% 24%, rgba(215,163,108,.35) 0 2px, transparent 3px),
+        radial-gradient(circle at 34% 70%, rgba(199,122,131,.30) 0 2px, transparent 3px),
+        radial-gradient(circle at 76% 28%, rgba(215,163,108,.25) 0 2px, transparent 3px),
+        radial-gradient(circle at 68% 78%, rgba(199,122,131,.22) 0 2px, transparent 3px),
+        radial-gradient(circle at 52% 46%, rgba(215,163,108,.18) 0 1.5px, transparent 3px);
       animation: drift 10s ease-in-out infinite alternate;
     }
     @keyframes drift{
-      from{ transform: translateY(-8px) }
-      to{ transform: translateY(12px) }
+      from { transform: translateY(-7px) translateX(-2px) }
+      to   { transform: translateY(12px) translateX(2px) }
     }
 
-    /* Confetti hearts (CSS only) */
-    .hearts{
-      position:fixed;
+    /* Tiny floating hearts (subtle, not too sweet) */
+    .floaty{
+      position:absolute;
       inset:0;
       pointer-events:none;
-      overflow:hidden;
-      z-index: 0;
+      opacity:.18;
+      background-image:
+        radial-gradient(circle at 18% 35%, rgba(199,122,131,.9) 0 1.2px, transparent 2.6px),
+        radial-gradient(circle at 72% 26%, rgba(215,163,108,.9) 0 1.2px, transparent 2.6px),
+        radial-gradient(circle at 84% 68%, rgba(199,122,131,.9) 0 1px, transparent 2.4px),
+        radial-gradient(circle at 40% 80%, rgba(215,163,108,.9) 0 1px, transparent 2.4px);
+      animation: floaty 12s ease-in-out infinite;
     }
-    .heart{
-      position:absolute;
-      left: var(--x);
-      top: -10vh;
-      width: 12px;
-      height: 12px;
-      transform: rotate(45deg);
-      opacity: .55;
-      filter: blur(.1px);
-      animation: fall var(--t) linear infinite;
-      will-change: transform;
-    }
-    .heart::before,
-    .heart::after{
-      content:"";
-      position:absolute;
-      width: 12px;
-      height: 12px;
-      background: rgba(199,122,131,.35);
-      border-radius: 50%;
-    }
-    .heart{
-      background: rgba(199,122,131,.35);
-      border-radius: 2px;
-    }
-    .heart::before{ left:-6px; top:0; }
-    .heart::after{ left:0; top:-6px; }
-    @keyframes fall{
-      to{
-        transform: translateY(120vh) rotate(45deg) translateX(var(--dx));
-        opacity: 0;
-      }
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0) }
+      50%{ transform: translateY(-10px) }
     }
 
     .wrap{
-      width:min(610px, 92vw);
-      position:relative;
-      perspective: 1200px;
-      z-index: 1;
+      width: min(580px, 92vw);
+      position: relative;
+      perspective: 1300px;
     }
 
-    /* ===== Envelope ===== */
+    /* Envelope */
     .envelope{
-      position:relative;
+      position: relative;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      background: linear-gradient(180deg, var(--env1), var(--env2));
-      border: 1px solid var(--env-line);
-      overflow:hidden;
+      background: linear-gradient(180deg, var(--envelope), var(--envelope-2));
+      border: 1px solid var(--envelope-line);
+      overflow: hidden;
       transform: translateY(0);
       transition: transform .7s cubic-bezier(.16,1,.3,1);
-      isolation:isolate;
+      isolation: isolate;
     }
 
-    .envelope::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius: var(--radius);
-      pointer-events:none;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.65),
-        inset 0 -1px 0 rgba(0,0,0,.04);
-      opacity:.9;
-    }
-
+    /* Linen + vignette */
     .envelope::before{
       content:"";
       position:absolute;
-      inset:0;
-      background-image:
-        repeating-linear-gradient(0deg, rgba(0,0,0,.016) 0 1px, transparent 1px 9px),
-        radial-gradient(circle at 24% 18%, rgba(255,255,255,.55), transparent 60%),
-        radial-gradient(circle at 75% 78%, rgba(255,255,255,.28), transparent 62%),
-        radial-gradient(circle at 60% 40%, rgba(215,163,108,.09), transparent 60%);
-      opacity:.55;
-      pointer-events:none;
-      z-index:0;
+      inset:-1px;
+      background:
+        radial-gradient(900px 520px at 30% 25%, rgba(255,255,255,.55), transparent 62%),
+        radial-gradient(900px 520px at 70% 80%, rgba(0,0,0,.06), transparent 58%),
+        repeating-linear-gradient(0deg, rgba(0,0,0,.015) 0 1px, transparent 1px 8px),
+        repeating-linear-gradient(90deg, rgba(0,0,0,.012) 0 1px, transparent 1px 10px);
+      opacity: .55;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: multiply;
     }
 
-    /* Flap */
+    /* Envelope flap */
     .flap{
       position:absolute;
       top:0; left:0; right:0;
-      height:62%;
+      height: 62%;
       transform-origin: top center;
       transform: rotateX(0deg);
       transition: transform .95s cubic-bezier(.16,1,.3,1);
-      z-index:5;
-      filter: drop-shadow(0 16px 20px rgba(0,0,0,.09));
+      z-index: 6;
+      filter: drop-shadow(0 18px 22px rgba(0,0,0,.09));
     }
     .flap::before{
       content:"";
       position:absolute;
       inset:0;
       background:
-        radial-gradient(circle at 50% 12%, rgba(255,255,255,.55), transparent 62%),
-        linear-gradient(180deg, #f9f0eb, #efd8ce);
+        radial-gradient(500px 240px at 50% 10%, rgba(255,255,255,.45), transparent 65%),
+        linear-gradient(180deg, #f9f0ea, #efd8ce);
       clip-path: polygon(0 0, 100% 0, 50% 92%);
       border-bottom: 1px solid rgba(0,0,0,.08);
     }
 
-    /* Body geometry */
+    /* Envelope body geometry */
     .body-shapes{
       position:absolute;
       inset:0;
-      z-index:1;
-      pointer-events:none;
+      z-index: 1;
+      pointer-events: none;
     }
     .body-shapes::before,
     .body-shapes::after{
@@ -210,28 +156,25 @@
       position:absolute;
       inset:0;
       border-radius: var(--radius);
-      opacity:.92;
+      opacity:.9;
     }
     .body-shapes::before{
-      background:
-        radial-gradient(circle at 22% 60%, rgba(255,255,255,.35), transparent 55%),
-        linear-gradient(135deg, rgba(255,255,255,.36), transparent 62%);
+      background: linear-gradient(135deg, rgba(255,255,255,.45), transparent 58%);
       clip-path: polygon(0 100%, 0 38%, 50% 70%);
       border-left: 1px solid rgba(0,0,0,.06);
     }
     .body-shapes::after{
-      background:
-        radial-gradient(circle at 78% 60%, rgba(255,255,255,.30), transparent 55%),
-        linear-gradient(225deg, rgba(255,255,255,.30), transparent 62%);
+      background: linear-gradient(225deg, rgba(255,255,255,.36), transparent 58%);
       clip-path: polygon(100% 100%, 100% 38%, 50% 70%);
       border-right: 1px solid rgba(0,0,0,.06);
     }
 
+    /* Bottom fold */
     .bottom-fold{
       position:absolute;
       left:0; right:0; bottom:0;
-      height:58%;
-      z-index:2;
+      height: 58%;
+      z-index: 2;
       pointer-events:none;
     }
     .bottom-fold::before{
@@ -239,187 +182,141 @@
       position:absolute;
       inset:0;
       background:
-        radial-gradient(circle at 50% 15%, rgba(255,255,255,.26), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.03));
+        radial-gradient(420px 220px at 50% 95%, rgba(255,255,255,.28), transparent 70%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(0,0,0,.035));
       clip-path: polygon(0 100%, 50% 35%, 100% 100%);
-      border-top: 1px solid rgba(0,0,0,.08);
+      border-top: 1px solid rgba(0,0,0,.075);
     }
 
-    /* Little charm text on envelope */
-    .tiny{
-      position:absolute;
-      left:50%;
-      top: 64%;
-      transform: translateX(-50%);
-      font-family: "Fraunces", serif;
-      font-size: .82rem;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: rgba(38,38,38,.45);
-      z-index:3;
-      pointer-events:none;
-      user-select:none;
-    }
-    .tiny::after{
-      content:"";
-      display:block;
-      height:1px;
-      width: 210px;
-      margin: 10px auto 0;
-      background: linear-gradient(90deg, transparent, rgba(215,163,108,.55), transparent);
-      opacity:.8;
-    }
-
-    /* Wax seal with shimmer + wiggle */
+    /* Wax seal (prettier + embossed + specks) */
     .seal{
       position:absolute;
       left:50%;
-      top:46%;
+      top: 46%;
       transform: translate(-50%, -50%);
-      width: 98px;
-      height: 98px;
+      width: 94px;
+      height: 94px;
       border-radius: 50%;
       background:
-        radial-gradient(circle at 30% 28%, rgba(255,255,255,.24), transparent 40%),
-        radial-gradient(circle at 65% 78%, rgba(0,0,0,.18), transparent 55%),
-        radial-gradient(circle at 52% 50%, rgba(255,255,255,.09), transparent 58%),
-        linear-gradient(180deg, var(--wax1), var(--wax2));
+        radial-gradient(circle at 30% 28%, rgba(255,255,255,.26), transparent 38%),
+        radial-gradient(circle at 68% 78%, rgba(0,0,0,.18), transparent 55%),
+        radial-gradient(circle at 54% 54%, rgba(255,255,255,.10), transparent 58%),
+        repeating-radial-gradient(circle at 48% 50%, rgba(255,255,255,.06) 0 1px, transparent 1px 6px),
+        linear-gradient(180deg, #a64a5a, var(--wax));
       box-shadow: 0 12px 30px rgba(155,58,74,.30);
       border: 5px double rgba(255,255,255,.18);
       display:grid;
       place-items:center;
       cursor:pointer;
-      z-index:8;
-      transition: transform .22s ease, opacity .45s ease, filter .22s ease;
-      user-select:none;
-      overflow:hidden;
+      z-index: 9;
+      transition: transform .22s ease, opacity .4s ease, filter .25s ease;
+      user-select: none;
+      filter: saturate(1.05);
     }
-    .seal:hover{
-      transform: translate(-50%, -50%) scale(1.07);
-      filter: brightness(1.03);
-    }
-    .seal:active{ transform: translate(-50%, -50%) scale(1.02); }
-
-    /* Shimmer sweep */
-    .seal::before{
+    .seal::after{
       content:"";
       position:absolute;
-      inset:-40%;
-      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.22) 50%, transparent 65%);
-      transform: translateX(-60%) rotate(10deg);
-      animation: shimmer 2.6s ease-in-out infinite;
-      opacity:.75;
+      inset:10px;
+      border-radius:50%;
+      box-shadow: inset 0 2px 0 rgba(255,255,255,.18), inset 0 -4px 10px rgba(0,0,0,.16);
+      opacity:.9;
       pointer-events:none;
     }
-    @keyframes shimmer{
-      0%,55%{ transform: translateX(-70%) rotate(10deg); opacity:.0; }
-      65%{ opacity:.75; }
-      100%{ transform: translateX(70%) rotate(10deg); opacity:0; }
-    }
+    .seal:hover{ transform: translate(-50%, -50%) scale(1.07); }
+    .seal:active{ transform: translate(-50%, -50%) scale(1.02); }
 
     .seal span{
-      font-family: "Playfair Display", serif;
+      font-family: "Cormorant Garamond", serif;
       font-weight: 600;
-      letter-spacing: .08em;
-      color: rgba(255,255,255,.94);
-      font-size: 1.75rem;
+      letter-spacing: .5px;
+      color: rgba(255,255,255,.93);
+      font-size: 1.95rem;
       text-shadow: 0 2px 0 rgba(0,0,0,.18);
-      transform: translateY(1px);
+      transform: translateY(-1px);
     }
 
-    /* ===== Letter ===== */
+    /* Letter */
     .letter{
-      position:relative;
-      width:min(492px, 88%);
-      margin:0 auto;
-      transform: translateY(30%);
+      position: relative;
+      width: min(470px, 88%);
+      margin: 0 auto;
+      transform: translateY(28%);
       transition: transform .95s cubic-bezier(.16,1,.3,1), opacity .65s ease;
-      opacity:0;
-      z-index:4;
+      opacity: 0;
+      z-index: 4;
       padding-top: 22px;
     }
 
     .paper{
-      background: linear-gradient(180deg, var(--paper1), var(--paper2));
+      background:
+        radial-gradient(900px 460px at 30% 20%, rgba(255,255,255,.75), transparent 64%),
+        radial-gradient(900px 520px at 70% 80%, rgba(0,0,0,.05), transparent 62%),
+        linear-gradient(180deg, #fffdf9, var(--paper));
       border: 1px solid var(--paper-edge);
-      border-radius: 22px;
+      border-radius: 18px;
       box-shadow: var(--shadow-soft);
-      padding: 30px 30px 22px;
-      position:relative;
-      overflow:hidden;
+      padding: 30px 26px 20px;
+      position: relative;
+      overflow: hidden;
     }
 
+    /* Fancy paper fibers */
     .paper::before{
       content:"";
       position:absolute;
-      inset:-2px;
+      inset:0;
       background:
-        radial-gradient(circle at 22% 22%, rgba(215,163,108,.10), transparent 55%),
-        radial-gradient(circle at 80% 72%, rgba(199,122,131,.10), transparent 60%),
-        repeating-linear-gradient(0deg, rgba(0,0,0,.012) 0 1px, transparent 1px 10px);
+        repeating-linear-gradient(0deg, rgba(0,0,0,.012) 0 1px, transparent 1px 9px),
+        repeating-linear-gradient(90deg, rgba(0,0,0,.010) 0 1px, transparent 1px 11px),
+        radial-gradient(circle at 25% 25%, rgba(215,163,108,.10), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(199,122,131,.10), transparent 60%);
       opacity:.55;
       pointer-events:none;
-    }
-    .paper::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      border-radius: 22px;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.78),
-        inset 0 -1px 0 rgba(0,0,0,.04);
-      opacity:.95;
     }
 
     .heading{
       text-align:center;
-      position:relative;
-      z-index:1;
+      position: relative;
+      z-index: 1;
     }
+
     .heading .to{
-      font-family:"Playfair Display", serif;
-      font-size: 1.9rem;
-      margin:0;
-      letter-spacing: .03em;
-    }
-    .heading .sub{
-      margin: 8px 0 0;
-      font-family: "Cormorant Garamond", serif;
-      font-style: italic;
-      color: var(--muted);
-      font-size: 1.05rem;
+      font-family: "Parisienne", cursive;
+      font-size: 2.15rem;
+      margin: 0;
+      color: var(--ink);
+      letter-spacing: .2px;
     }
 
     .divider{
-      width: 88px;
+      width: 74px;
       height: 1px;
-      margin: 18px auto 16px;
+      margin: 18px auto 14px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity:.95;
-      position:relative;
-      z-index:1;
+      opacity: .95;
+      position: relative;
+      z-index: 1;
     }
 
     .message{
-      font-family:"Cormorant Garamond", serif;
+      font-family: "Cormorant Garamond", serif;
       font-size: 1.38rem;
       line-height: 1.7;
       text-align:center;
-      color: rgba(30,30,30,.84);
+      color: rgba(30,30,30,.86);
       margin: 0;
-      position:relative;
-      z-index:1;
+      position: relative;
+      z-index: 1;
     }
 
     .signature{
       margin-top: 16px;
-      text-align:center;
-      font-family:"Parisienne", cursive;
-      font-size: 1.7rem;
-      color: rgba(43,43,43,.82);
-      position:relative;
-      z-index:1;
+      text-align: center;
+      font-family: "Parisienne", cursive;
+      font-size: 1.6rem;
+      color: rgba(38,38,38,.82);
+      position: relative;
+      z-index: 1;
     }
 
     /* Buttons */
@@ -427,31 +324,31 @@
       display:flex;
       justify-content:center;
       gap: 12px;
-      margin-top: 16px;
-      position:relative;
-      z-index:1;
-      flex-wrap:wrap;
+      margin-top: 14px;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
     }
 
     .btn{
-      appearance:none;
-      border: 1px solid rgba(215,163,108,.60);
-      background: rgba(255,255,255,.74);
-      color: rgba(43,43,43,.82);
+      appearance: none;
+      border: 1px solid rgba(215,163,108,.65);
+      background: rgba(255,255,255,.70);
+      color: rgba(38,38,38,.80);
       padding: 10px 14px;
       border-radius: 999px;
       font-size: .82rem;
       letter-spacing: .6px;
-      cursor:pointer;
+      cursor: pointer;
       transition: transform .15s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
       backdrop-filter: blur(10px);
-      box-shadow: 0 10px 24px rgba(0,0,0,.06);
+      box-shadow: 0 10px 22px rgba(0,0,0,.06);
     }
     .btn:hover{
       transform: translateY(-1px);
       background: rgba(215,163,108,.12);
-      border-color: rgba(199,122,131,.50);
-      box-shadow: 0 14px 30px rgba(0,0,0,.08);
+      border-color: rgba(199,122,131,.55);
+      box-shadow: 0 12px 28px rgba(0,0,0,.08);
     }
     .btn.primary{
       background: linear-gradient(180deg, rgba(199,122,131,.18), rgba(215,163,108,.12));
@@ -461,81 +358,52 @@
     .hint{
       text-align:center;
       font-size: .82rem;
-      color: rgba(43,43,43,.56);
+      color: rgba(38,38,38,.56);
       padding: 18px 16px 22px;
-      position:relative;
-      z-index:3;
+      position: relative;
+      z-index: 3;
     }
-    .hint b{ color: rgba(43,43,43,.76); font-weight: 500; }
-
-    /* Open state */
-    .is-open .flap{ transform: rotateX(-155deg); }
-    .is-open .seal{
-      opacity:0;
-      transform: translate(-50%, -50%) scale(.92);
-      pointer-events:none;
-    }
-    .is-open .letter{ transform: translateY(-7%); opacity:1; }
-
-    /* ===== Extra gimmick: Typewriter reveal when opened ===== */
-    .typewriter{
-      display:inline;
-      border-right: 2px solid rgba(215,163,108,.55);
-      padding-right: 2px;
-      animation: caret 1s steps(1) infinite;
-    }
-    @keyframes caret{
-      50%{ border-color: transparent; }
-    }
+    .hint b{ color: rgba(38,38,38,.76); font-weight: 500; }
 
     /* Toast */
     .toast{
-      position: fixed;
+      position: absolute;
       left: 50%;
       bottom: 18px;
-      transform: translateX(-50%) translateY(20px);
+      transform: translateX(-50%) translateY(14px);
       opacity: 0;
+      pointer-events:none;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(215,163,108,.45);
+      backdrop-filter: blur(10px);
       padding: 10px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(215,163,108,.45);
-      background: rgba(255,255,255,.82);
-      box-shadow: 0 18px 44px rgba(0,0,0,.12);
-      backdrop-filter: blur(10px);
-      font-size: .82rem;
-      letter-spacing: .2px;
-      color: rgba(38,38,38,.78);
+      box-shadow: 0 14px 34px rgba(0,0,0,.10);
+      font-size: .85rem;
+      color: rgba(38,38,38,.80);
       transition: opacity .25s ease, transform .25s ease;
-      z-index: 10;
+      z-index: 50;
+      white-space: nowrap;
     }
     .toast.show{
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
 
-    /* Reduce motion */
+    /* Open state */
+    .is-open{ transform: translateY(-4px); }
+    .is-open .flap{ transform: rotateX(-160deg); }
+    .is-open .seal{ opacity: 0; transform: translate(-50%, -50%) scale(.92); pointer-events:none; }
+    .is-open .letter{ transform: translateY(-7%); opacity: 1; }
+
     @media (prefers-reduced-motion: reduce){
-      .flap, .seal, .letter, .envelope, .sparkle, .heart{ transition:none !important; animation:none !important; }
-      .typewriter{ border-right: none; }
+      .flap, .seal, .letter, .envelope, .sparkle, .floaty{ transition: none !important; animation: none !important; }
     }
   </style>
 </head>
-
 <body>
   <div class="sparkle"></div>
-
-  <!-- floating heart confetti -->
-  <div class="hearts" aria-hidden="true">
-    <div class="heart" style="--x:10%; --t:7.8s; --dx:-14px;"></div>
-    <div class="heart" style="--x:18%; --t:9.2s; --dx:18px;"></div>
-    <div class="heart" style="--x:27%; --t:8.4s; --dx:-8px;"></div>
-    <div class="heart" style="--x:38%; --t:10.4s; --dx:12px;"></div>
-    <div class="heart" style="--x:49%; --t:8.8s; --dx:-10px;"></div>
-    <div class="heart" style="--x:58%; --t:9.9s; --dx:16px;"></div>
-    <div class="heart" style="--x:66%; --t:7.6s; --dx:-16px;"></div>
-    <div class="heart" style="--x:75%; --t:10.8s; --dx:10px;"></div>
-    <div class="heart" style="--x:84%; --t:8.1s; --dx:-12px;"></div>
-    <div class="heart" style="--x:92%; --t:9.4s; --dx:14px;"></div>
-  </div>
+  <div class="floaty"></div>
 
   <div class="wrap">
     <div class="envelope" id="envelope">
@@ -547,26 +415,25 @@
         <span>J</span>
       </div>
 
-      <div class="tiny">tap to open</div>
-
       <div class="letter" id="letter" aria-hidden="true">
         <div class="paper">
           <div class="heading">
             <p class="to">For Jimmy</p>
-            <p class="sub">a small note, sealed with good luck ✨</p>
           </div>
 
           <div class="divider"></div>
 
-          <!-- noteText will be typewritten -->
-          <p class="message" id="noteText"></p>
+          <p class="message" id="noteText">
+            Just a gentle reminder that you’re being thought of.<br>
+            I’m rooting for you, always.<br>
+            Text me anytime. I’m in your corner.
+          </p>
 
           <div class="signature">— Aomsin</div>
 
           <div class="tools">
             <button class="btn primary" onclick="copyNote()">Copy text</button>
             <button class="btn" onclick="resetSeal()">Reseal</button>
-            <button class="btn" onclick="confettiPop()">✨ Surprise</button>
           </div>
         </div>
       </div>
@@ -574,21 +441,12 @@
       <div class="hint" id="hint">
         Tap the <b>wax seal</b> to open your envelope ✨
       </div>
+
+      <div class="toast" id="toast">Copied. 💌</div>
     </div>
   </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
   <script>
-    // Your message (elegant + supportive)
-    const NOTE_LINES = [
-      "Just a gentle reminder that you’re being thought of.",
-      "I’m rooting for you, always.",
-      "Text me anytime. I’m in your corner."
-    ];
-
-    let typingTimer = null;
-
     function unseal(){
       const env = document.getElementById('envelope');
       const letter = document.getElementById('letter');
@@ -597,127 +455,38 @@
       env.classList.add('is-open');
       letter.setAttribute('aria-hidden', 'false');
       hint.style.opacity = '0';
-      setTimeout(() => (hint.style.display = 'none'), 300);
-
-      // typewriter reveal
-      startTypewriter();
-      toast("Unlocked 💌");
+      setTimeout(() => (hint.style.display = 'none'), 320);
     }
 
     function resetSeal(){
       const env = document.getElementById('envelope');
       const letter = document.getElementById('letter');
       const hint = document.getElementById('hint');
-      const noteEl = document.getElementById('noteText');
 
       env.classList.remove('is-open');
       letter.setAttribute('aria-hidden', 'true');
       hint.style.display = 'block';
       hint.style.opacity = '1';
+    }
 
-      // reset message
-      stopTypewriter();
-      noteEl.innerHTML = "";
-      toast("Resealed ✨");
+    function showToast(text){
+      const t = document.getElementById('toast');
+      t.textContent = text;
+      t.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => t.classList.remove('show'), 1200);
     }
 
     function copyNote(){
-      const note = NOTE_LINES.join("\n").trim();
+      const note = document.getElementById('noteText').innerText
+        .replace(/\n\n/g, "\n")
+        .trim();
 
       navigator.clipboard.writeText(note).then(() => {
-        toast("Copied. 💌");
+        showToast("Copied. 💌");
       }).catch(() => {
-        alert("Couldn’t copy automatically — please copy manually. 💗");
+        showToast("Copy manually 💗");
       });
-    }
-
-    function startTypewriter(){
-      const el = document.getElementById('noteText');
-      stopTypewriter();
-
-      // Build final text with <br> but type character by character
-      const target = NOTE_LINES.join("\n");
-      let i = 0;
-
-      el.innerHTML = `<span class="typewriter"></span>`;
-      const span = el.querySelector(".typewriter");
-
-      typingTimer = setInterval(() => {
-        const ch = target[i++];
-        if (ch === "\n") {
-          span.innerHTML += "<br>";
-        } else {
-          span.textContent += ch;
-        }
-        if (i >= target.length) {
-          clearInterval(typingTimer);
-          typingTimer = null;
-          span.classList.remove("typewriter"); // stop caret
-        }
-      }, 22);
-    }
-
-    function stopTypewriter(){
-      if (typingTimer) {
-        clearInterval(typingTimer);
-        typingTimer = null;
-      }
-    }
-
-    // Tiny confetti burst (no library)
-    function confettiPop(){
-      const env = document.getElementById("envelope");
-      const colors = [
-        "rgba(215,163,108,.95)",
-        "rgba(199,122,131,.95)",
-        "rgba(255,255,255,.95)"
-      ];
-
-      for (let i=0; i<36; i++){
-        const p = document.createElement("div");
-        p.style.position = "absolute";
-        p.style.left = "50%";
-        p.style.top = "46%";
-        p.style.width = (Math.random() * 6 + 4) + "px";
-        p.style.height = (Math.random() * 10 + 6) + "px";
-        p.style.borderRadius = "2px";
-        p.style.background = colors[Math.floor(Math.random()*colors.length)];
-        p.style.transform = "translate(-50%,-50%) rotate(" + (Math.random()*180) + "deg)";
-        p.style.opacity = "0.95";
-        p.style.zIndex = "9";
-        p.style.pointerEvents = "none";
-
-        const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * 120 + 60;
-        const dx = Math.cos(angle) * dist;
-        const dy = Math.sin(angle) * dist - 30;
-        const dur = Math.random() * 520 + 520;
-
-        env.appendChild(p);
-
-        const start = performance.now();
-        (function animate(t){
-          const k = Math.min(1, (t - start) / dur);
-          const ease = 1 - Math.pow(1 - k, 3);
-          p.style.transform =
-            "translate(calc(-50% + " + (dx*ease) + "px), calc(-50% + " + (dy*ease) + "px)) rotate(" + (360*ease) + "deg)";
-          p.style.opacity = String(1 - k);
-          if (k < 1) requestAnimationFrame(animate);
-          else p.remove();
-        })(start);
-      }
-
-      toast("Surprise ✨");
-    }
-
-    // Cute toast
-    let toastTimer = null;
-    function toast(msg){
-      const t = document.getElementById("toast");
-      t.textContent = msg;
-      t.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(()=> t.classList.remove("show"), 1400);
     }
   </script>
 </body>
