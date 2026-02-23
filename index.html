@@ -3,697 +3,214 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rooting for you, Jimmy</title>
+  <title>A Note for Jimmy</title>
 
-  <!-- Classic serif + clean sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@300;500&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --paper: #fbf7f2;
-      --paper2:#f6efe7;
-      --ink: #1a1a1f;
-      --muted: rgba(26,26,31,.62);
-
-      --rose: #c66b7c;
-      --gold: #c7a46b;
-      --leaf: #7a9b86;
-
-      --card: rgba(255,255,255,.68);
-      --stroke: rgba(26,26,31,.14);
-      --shadow: 0 20px 60px rgba(20,15,10,.14);
-      --radius: 26px;
+    :root {
+      --bg: #fdfcfb;
+      --accent: #d4a373; /* Soft Gold */
+      --text: #2d2d2d;
+      --glass: rgba(255, 255, 255, 0.8);
+      --shadow: 0 12px 40px rgba(0,0,0,0.06);
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      color: var(--ink);
-      background:
-        radial-gradient(900px 540px at 12% 12%, rgba(198,107,124,.12), transparent 62%),
-        radial-gradient(900px 540px at 88% 18%, rgba(199,164,107,.12), transparent 62%),
-        radial-gradient(900px 540px at 55% 90%, rgba(122,155,134,.10), transparent 62%),
-        linear-gradient(135deg, var(--paper), var(--paper2));
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      overflow-x:hidden;
-    }
-
-    .wrap{
-      width: min(980px, 92vw);
-      margin: 0 auto;
-      padding: 34px 0 78px;
-      position: relative;
-    }
-
-    /* Subtle “vellum” grain */
-    .wrap:before{
-      content:"";
-      position: fixed;
-      inset: 0;
-      pointer-events:none;
-      opacity: .10;
-      background-image:
-        radial-gradient(rgba(26,26,31,.25) 0.6px, transparent 0.6px);
-      background-size: 9px 9px;
-      mix-blend-mode: multiply;
-    }
-
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap: 12px;
-      padding: 14px 18px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.55);
-      border-radius: 999px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 30px rgba(20,15,10,.10);
-      position: sticky;
-      top: 14px;
-      z-index: 10;
-    }
-
-    .brand{
-      display:flex; align-items:center; gap: 10px;
-      letter-spacing: .2px;
-      font-weight: 600;
-    }
-    .seal{
-      width: 34px; height: 34px;
-      border-radius: 999px;
-      border: 1px solid rgba(26,26,31,.18);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(198,107,124,.35), transparent 60%),
-        radial-gradient(circle at 70% 70%, rgba(199,164,107,.28), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.30));
-      position: relative;
-      box-shadow: 0 14px 28px rgba(198,107,124,.10);
-    }
-    .seal:after{
-      content:"";
-      position:absolute;
-      inset: 9px;
-      border-radius: 999px;
-      border: 1px dashed rgba(26,26,31,.22);
-      opacity:.9;
-    }
-
-    .meta{
-      font-size: 12px;
-      color: rgba(26,26,31,.58);
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .grid{
-      margin-top: 18px;
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 16px;
-      align-items: stretch;
-    }
-    @media (max-width: 900px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-
-    .card{
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.55);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      overflow:hidden;
-      position: relative;
-    }
-
-    /* Left column */
-    .left{
-      padding: 26px;
-      display:flex;
-      flex-direction: column;
-      gap: 18px;
-      min-height: 460px;
-      justify-content: space-between;
-    }
-
-    h1{
+    body {
       margin: 0;
-      font-family: "Playfair Display", serif;
-      font-size: clamp(34px, 4.0vw, 52px);
-      line-height: 1.04;
-      letter-spacing: -0.6px;
-    }
-    .lead{
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.7;
-      max-width: 62ch;
-    }
-
-    /* Gimmick block */
-    .gimmick{
-      display:flex;
-      flex-wrap: wrap;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 14px;
-      border-radius: 18px;
-      border: 1px solid rgba(26,26,31,.14);
-      background: rgba(255,255,255,.62);
-    }
-
-    .btn{
-      cursor:pointer;
-      border: 1px solid rgba(26,26,31,.16);
-      background: rgba(255,255,255,.70);
-      padding: 12px 14px;
-      border-radius: 16px;
-      font-weight: 600;
-      letter-spacing: .1px;
-      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
-      display:inline-flex; align-items:center; gap: 10px;
-      user-select:none;
-    }
-    .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 30px rgba(20,15,10,.10); }
-    .btn.primary{
-      background: linear-gradient(180deg, rgba(198,107,124,.22), rgba(255,255,255,.72));
-      border-color: rgba(198,107,124,.35);
-    }
-    .hint{
-      color: rgba(26,26,31,.62);
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    /* ===== Envelope centerpiece (classic + elegant + cute) ===== */
-
-    .envelope-wrap{
-      padding: 6px;
-      border-radius: 24px;
-      border: 1px solid rgba(26,26,31,.12);
-      background: rgba(255,255,255,.45);
-    }
-
-    .envelope{
-      position: relative;
-      border-radius: 22px;
+      justify-content: center;
+      min-height: 100vh;
       overflow: hidden;
-      border: 1px solid rgba(26,26,31,.14);
-      background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.52));
-      box-shadow: 0 18px 55px rgba(20,15,10,.12);
-      min-height: 320px;
-      transform: translateZ(0);
     }
 
-    /* Envelope pocket (back) */
-    .env-back{
-      position:absolute;
-      inset: 0;
-      background:
-        radial-gradient(900px 320px at 20% 20%, rgba(198,107,124,.10), transparent 62%),
-        radial-gradient(900px 320px at 85% 22%, rgba(199,164,107,.10), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.48));
+    /* Ambient background shapes */
+    .blob {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(212, 163, 115, 0.08) 0%, rgba(255,255,255,0) 70%);
+      z-index: -1;
+      border-radius: 50%;
     }
 
-    /* Envelope seams */
-    .envelope:before,
-    .envelope:after{
-      content:"";
-      position:absolute;
-      inset: 0;
-      pointer-events:none;
-      opacity:.85;
-    }
-    .envelope:before{
-      background:
-        linear-gradient(135deg, transparent 48%, rgba(26,26,31,.10) 49%, transparent 50%) left bottom/50% 66% no-repeat,
-        linear-gradient(225deg, transparent 48%, rgba(26,26,31,.10) 49%, transparent 50%) right bottom/50% 66% no-repeat;
-    }
-    .envelope:after{
-      content:"";
-      position:absolute;
-      left: 10%;
-      right: 10%;
-      bottom: 40%;
-      height: 1px;
-      background: rgba(26,26,31,.10);
-      border-radius: 999px;
-      opacity: .85;
+    /* Main Container */
+    .container {
+      width: 90%;
+      max-width: 500px;
+      perspective: 1000px;
     }
 
-    /* Flap (triangle) */
-    .env-flap{
-      position:absolute;
-      left: 50%;
-      top: -8px;
-      width: 150%;
-      height: 190px;
-      transform: translateX(-50%);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.10));
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
-      opacity: .85;
-      transform-origin: 50% 0%;
-      transition: transform .55s ease, opacity .55s ease;
-      pointer-events:none;
-    }
-
-    /* Wax seal (cute + classic) */
-    .wax{
-      position:absolute;
-      left: 50%;
-      top: 78px;
-      transform: translateX(-50%);
-      width: 66px;
-      height: 66px;
-      border-radius: 999px;
-      border: 1px solid rgba(26,26,31,.16);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,.30), transparent 60%),
-        radial-gradient(circle at 70% 70%, rgba(255,255,255,.12), transparent 60%),
-        linear-gradient(180deg, rgba(198,107,124,.95), rgba(167,74,93,.92));
-      box-shadow:
-        0 18px 35px rgba(198,107,124,.18),
-        inset 0 10px 18px rgba(255,255,255,.18);
-      display:grid;
-      place-items:center;
-      z-index: 6;
-      cursor:pointer;
-      transition: transform .18s ease;
-    }
-    .wax:hover{ transform: translateX(-50%) translateY(-1px); }
-
-    .wax-ring{
-      position:absolute;
-      inset: 10px;
-      border-radius: 999px;
-      border: 1px dashed rgba(255,255,255,.55);
-      opacity: .9;
-    }
-    .wax-initial{
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      font-size: 18px;
-      color: rgba(255,255,255,.92);
-      letter-spacing: .02em;
-    }
-
-    /* Letter sheet */
-    .sheet{
-      position:absolute;
-      left: 50%;
-      bottom: 26px;
-      transform: translateX(-50%);
-      width: min(92%, 560px);
-      border-radius: 18px;
-      border: 1px solid rgba(26,26,31,.14);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.58));
-      box-shadow: 0 18px 45px rgba(20,15,10,.10);
-      z-index: 5;
-      transition: transform .60s cubic-bezier(.2,.9,.2,1), box-shadow .60s ease;
-      overflow:hidden;
-    }
-
-    /* a tiny “red margin” like stationery */
-    .sheet:before{
-      content:"";
-      position:absolute;
-      left: 18px;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: rgba(198,107,124,.22);
-    }
-    .sheet-inner{
-      padding: 18px 18px 16px 26px;
+    /* The Note Card */
+    .note-card {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 60px 40px;
+      border-radius: 2px; /* Classic sharp stationery look */
+      box-shadow: var(--shadow);
+      text-align: center;
       position: relative;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
     }
 
-    .message{
-      margin: 0;
-      font-family: "Playfair Display", serif;
-      font-size: clamp(22px, 2.2vw, 30px);
-      line-height: 1.25;
-    }
-    .message small{
-      display:block;
-      margin-top: 12px;
-      font-family: Inter, system-ui, sans-serif;
-      font-size: 15px;
-      color: rgba(26,26,31,.70);
-      font-weight: 600;
-    }
-
-    .flourish{
-      display:none;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(26,26,31,.10);
-      color: rgba(26,26,31,.62);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-    .flourish.show{ display:block; }
-
-    /* Open state animations */
-    .envelope.open .env-flap{
-      transform: translateX(-50%) translateY(-14px) rotateX(34deg);
-      opacity: .45;
-    }
-    .envelope.open .sheet{
-      transform: translateX(-50%) translateY(-78px);
-      box-shadow: 0 26px 70px rgba(20,15,10,.16);
-    }
-    .envelope.open .wax{
-      animation: waxPop .55s ease forwards;
-    }
-    @keyframes waxPop{
-      0%{ transform: translateX(-50%) scale(1); opacity: 1; }
-      35%{ transform: translateX(-50%) scale(1.06) rotate(-2deg); }
-      60%{ transform: translateX(-50%) scale(.96) rotate(2deg); }
-      100%{ transform: translateX(-50%) scale(.86) rotate(6deg); opacity: 0; }
-    }
-
-    /* Subtle paper hearts */
-    .paper-hearts{
-      position:absolute;
-      inset: 0;
-      pointer-events:none;
-      overflow:hidden;
-      z-index: 7;
-    }
-    .heart{
-      position:absolute;
-      font-size: 14px;
+    .note-card.is-hidden {
+      transform: translateY(20px) rotateX(-10deg);
       opacity: 0;
-      transform: translateY(10px);
-      filter: drop-shadow(0 10px 16px rgba(20,15,10,.10));
-      animation: riseHeart 1.4s ease-out forwards;
-    }
-    @keyframes riseHeart{
-      0%{ opacity: 0; transform: translateY(14px) scale(.9); }
-      20%{ opacity: .9; }
-      100%{ opacity: 0; transform: translateY(-110px) scale(1.08); }
+      pointer-events: none;
     }
 
-    .actions{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
     }
 
-    /* Right column preview */
-    .right{
-      padding: 18px;
-      display:flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .preview{
-      border-radius: 26px;
-      border: 1px solid rgba(26,26,31,.14);
-      background:
-        radial-gradient(800px 320px at 20% 20%, rgba(198,107,124,.10), transparent 62%),
-        radial-gradient(800px 320px at 85% 22%, rgba(199,164,107,.10), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.48));
-      box-shadow: 0 20px 55px rgba(20,15,10,.12);
-      overflow:hidden;
-      position: relative;
-      min-height: 420px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 18px;
-    }
-
-    .note-card{
-      width: 100%;
-      border-radius: 26px;
-      border: 1px solid rgba(26,26,31,.12);
-      background: rgba(255,255,255,.70);
-      padding: 18px;
-      box-shadow: 0 18px 45px rgba(20,15,10,.10);
-      position: relative;
-      overflow:hidden;
-      transform: rotate(-1.1deg);
-    }
-
-    .note-card .topline{
-      display:flex; align-items:center; justify-content:space-between;
-      gap: 10px;
-      font-size: 12px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: rgba(26,26,31,.55);
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    .wax-mini{
-      display:inline-flex; align-items:center; gap: 8px;
-    }
-    .dot{
-      width: 8px; height: 8px; border-radius: 999px;
-      background: rgba(198,107,124,.85);
-      box-shadow: 0 10px 18px rgba(198,107,124,.16);
-    }
-
-    .note-card h2{
-      margin: 0;
-      font-family: "Playfair Display", serif;
-      font-size: 22px;
-      letter-spacing: -0.3px;
-      line-height: 1.2;
-    }
-    .note-card p{
-      margin: 10px 0 0;
-      color: rgba(26,26,31,.70);
-      font-weight: 600;
+    p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
       line-height: 1.6;
+      color: #555;
     }
 
-    /* Toast */
-    .toast{
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%) translateY(20px);
-      opacity: 0;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(26,26,31,.14);
-      padding: 12px 14px;
-      border-radius: 999px;
-      box-shadow: 0 16px 40px rgba(20,15,10,.14);
-      backdrop-filter: blur(14px);
-      transition: opacity .18s ease, transform .18s ease;
-      display:flex; align-items:center; gap: 10px;
-      z-index: 1000;
-      max-width: min(92vw, 620px);
-      color: rgba(26,26,31,.78);
-      font-weight: 700;
-    }
-    .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
-    .toast .seal-mini{
-      width: 10px; height: 10px; border-radius: 999px;
-      background: linear-gradient(180deg, rgba(198,107,124,.95), rgba(199,164,107,.75));
-      box-shadow: 0 10px 18px rgba(198,107,124,.14);
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 30px auto;
     }
 
-    footer{
-      margin-top: 18px;
-      display:flex; justify-content:space-between; gap: 12px; flex-wrap: wrap;
-      color: rgba(26,26,31,.55);
-      font-size: 13px;
-      padding: 0 2px;
+    /* Unseal Button */
+    .unseal-trigger {
+      cursor: pointer;
+      background: none;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 12px 30px;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      margin-top: 20px;
     }
 
-    @media (prefers-reduced-motion: reduce){
-      .btn{ transition:none !important; }
-      .env-flap, .sheet, .wax{ transition:none !important; animation:none !important; }
-      .heart{ animation:none !important; opacity: 0 !important; }
+    .unseal-trigger:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Floating "Seal" button for the initial state */
+    .initial-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: opacity 0.5s ease;
+    }
+
+    .wax-seal {
+      width: 80px;
+      height: 80px;
+      background: #a63d40; /* Deep wax red */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(166, 61, 64, 0.3);
+      border: 4px double rgba(255,255,255,0.2);
+      transition: transform 0.3s;
+    }
+
+    .wax-seal:hover {
+      transform: scale(1.05);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .footer-tools {
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .tool-btn {
+      background: none;
+      border: none;
+      color: #999;
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-decoration: underline;
     }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="seal" aria-hidden="true"></div>
-        <div>lovely note</div>
+
+  <div class="blob" style="top: -10%; left: -10%;"></div>
+  <div class="blob" style="bottom: -10%; right: -10%;"></div>
+
+  <div class="container">
+    <div class="initial-overlay" id="overlay">
+      <div class="wax-seal" onclick="unseal()">J</div>
+    </div>
+
+    <div class="note-card is-hidden" id="noteCard">
+      <h1>For Jimmy</h1>
+      <div class="divider"></div>
+      <p>
+        Just a quiet reminder that you're being thought of.<br>
+        Take your time, breathe, and know<br>
+        that I'm always in your corner.
+      </p>
+      
+      <div class="footer-tools">
+        <button class="tool-btn" onclick="copyNote()">Copy Text</button>
+        <button class="tool-btn" onclick="location.reload()">Reset Seal</button>
       </div>
-      <div class="meta">classic • soft • screenshot-ready</div>
-    </header>
-
-    <section class="grid">
-      <!-- LEFT -->
-      <div class="card left">
-        <div>
-          <h1>A small page<br/>with a steady heart.</h1>
-          <p class="lead">
-            Lovely, calm, and classic—like a handwritten note you’d want to keep.
-            One gentle gimmick first, then the message.
-          </p>
-        </div>
-
-        <!-- ONE dopamine gimmick -->
-        <div class="gimmick" aria-label="Dopamine gimmick">
-          <button class="btn primary" id="sealBtn" type="button">✉️ unseal the letter</button>
-          <div class="hint">A wax seal opens and the letter slides out — calm dopamine.</div>
-        </div>
-
-        <!-- Envelope message -->
-        <div class="envelope-wrap" aria-label="Support message">
-          <div class="envelope" id="envelope">
-            <div class="env-back"></div>
-            <div class="env-flap"></div>
-
-            <button class="wax" id="waxSeal" type="button" aria-label="Wax seal">
-              <span class="wax-ring"></span>
-              <span class="wax-initial">J</span>
-            </button>
-
-            <div class="sheet" id="sheet">
-              <div class="sheet-inner">
-                <p class="message">
-                  Rooting for you, Jimmy.
-                  <small>Text me anytime. I’m here for you.</small>
-                </p>
-
-                <div class="flourish" id="flourish">
-                  A small reminder: you don’t have to carry everything alone.
-                </div>
-              </div>
-            </div>
-
-            <div class="paper-hearts" id="paperHearts" aria-hidden="true"></div>
-          </div>
-        </div>
-
-        <div class="actions">
-          <button class="btn" id="copyBtn" type="button">Copy message</button>
-          <button class="btn" id="softBtn" type="button">Add a gentle line</button>
-        </div>
-      </div>
-
-      <!-- RIGHT -->
-      <aside class="card right" aria-label="Preview">
-        <div class="preview">
-          <div class="note-card">
-            <div class="topline">
-              <span class="wax-mini"><span class="dot" aria-hidden="true"></span> wax-seal energy</span>
-              <span id="clock">00:00</span>
-            </div>
-            <h2>Rooting for you, Jimmy.</h2>
-            <p>Text me anytime. I’m here for you.</p>
-          </div>
-        </div>
-
-        <div style="color: rgba(26,26,31,.62); font-size: 13px; line-height: 1.6;">
-          Screenshot tip: capture the right-side note card, or the envelope block on the left.
-        </div>
-      </aside>
-    </section>
-
-    <footer>
-      <div>Made with quiet warmth.</div>
-      <div style="font-family: Inter, system-ui, sans-serif;">Customize colors in <code>:root</code></div>
-    </footer>
-  </div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite">
-    <span class="seal-mini" aria-hidden="true"></span>
-    <span id="toastText">Seal opened.</span>
+    </div>
   </div>
 
   <script>
-    // clock for a “kept note” vibe
-    function updateClock(){
-      const d = new Date();
-      const hh = String(d.getHours()).padStart(2,'0');
-      const mm = String(d.getMinutes()).padStart(2,'0');
-      document.getElementById('clock').textContent = `${hh}:${mm}`;
-    }
-    updateClock();
-    setInterval(updateClock, 15000);
-
-    // toast
-    const toast = document.getElementById('toast');
-    const toastText = document.getElementById('toastText');
-    function showToast(text){
-      toastText.textContent = text;
-      toast.classList.add('show');
-      clearTimeout(showToast._t);
-      showToast._t = setTimeout(() => toast.classList.remove('show'), 2200);
+    function unseal() {
+      // Hide the seal
+      const overlay = document.getElementById('overlay');
+      overlay.style.opacity = '0';
+      
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        // Show the card
+        const card = document.getElementById('noteCard');
+        card.classList.remove('is-hidden');
+      }, 500);
     }
 
-    // copy message
-    const base = "Rooting for you, Jimmy.\nText me anytime. I’m here for you.";
-    document.getElementById('copyBtn').addEventListener('click', async () => {
-      try{
-        await navigator.clipboard.writeText(base);
-        showToast("Copied. Send it when you’re ready.");
-      }catch(e){
-        showToast("Copy blocked. You can highlight + copy manually.");
-      }
-    });
-
-    // add gentle line
-    document.getElementById('softBtn').addEventListener('click', () => {
-      document.getElementById('flourish').classList.add('show');
-      showToast("Added a gentle line.");
-    });
-
-    // ===== ONE gimmick: unseal -> flap opens + letter slides + subtle hearts =====
-    const envelope = document.getElementById('envelope');
-    const flourish = document.getElementById('flourish');
-    const hearts = document.getElementById('paperHearts');
-
-    let opened = false;
-
-    function rand(min, max){ return Math.random() * (max - min) + min; }
-
-    function sprinkleHearts(count = 12){
-      const rect = envelope.getBoundingClientRect();
-      for(let i=0;i<count;i++){
-        const el = document.createElement('span');
-        el.className = 'heart';
-        el.textContent = (Math.random() > 0.5) ? '♡' : '❦';
-        el.style.left = rand(rect.width * 0.30, rect.width * 0.70) + 'px';
-        el.style.top  = rand(rect.height * 0.55, rect.height * 0.80) + 'px';
-        el.style.animationDuration = rand(1.1, 1.6) + 's';
-        el.style.animationDelay = rand(0, .08) + 's';
-        hearts.appendChild(el);
-        el.addEventListener('animationend', () => el.remove());
-      }
+    function copyNote() {
+      const text = "For Jimmy: Just a quiet reminder that you're being thought of. Take your time, breathe, and know that I'm always in your corner.";
+      navigator.clipboard.writeText(text);
+      alert("Note copied to clipboard.");
     }
-
-    document.getElementById('sealBtn').addEventListener('click', () => {
-      opened = !opened;
-
-      envelope.classList.toggle('open', opened);
-      flourish.classList.toggle('show', opened);
-
-      if(opened){
-        sprinkleHearts(14);
-        showToast("Unsealed. A quiet kind of comfort.");
-      }else{
-        showToast("Resealed.");
-      }
-    });
-
-    // Optional: clicking the wax seal also toggles (cute)
-    document.getElementById('waxSeal').addEventListener('click', () => {
-      document.getElementById('sealBtn').click();
-    });
   </script>
+
 </body>
 </html>
