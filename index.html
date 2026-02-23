@@ -6,195 +6,432 @@
   <title>A Note for Jimmy</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@300;500&family=Meie+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@300;500&family=Parisienne&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg: #fdfcfb;
-      --accent: #d4a373;
-      --text: #2d2d2d;
-      --wax: #a63d40;
+    :root{
+      --bg: #fbf7f4;
+      --ink: #2b2b2b;
+      --muted: rgba(43,43,43,.68);
+
+      --paper: #fffaf4;
+      --paper-edge: rgba(0,0,0,.07);
+
+      --envelope: #f5e6df;
+      --envelope-2: #efd7cc;
+      --envelope-line: rgba(0,0,0,.09);
+
+      --accent: #d7a36c;      /* soft gold */
+      --rose: #c77a83;        /* rosy */
+      --wax: #9b3a4a;         /* deep wax */
+      --wax-hi: rgba(255,255,255,.25);
+
+      --shadow: 0 22px 60px rgba(0,0,0,.10);
+      --shadow-soft: 0 14px 40px rgba(0,0,0,.08);
+
+      --radius: 22px;
     }
 
-    body {
-      margin: 0; padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; overflow: hidden;
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body{
+      margin: 0;
+      background:
+        radial-gradient(700px 500px at 20% 15%, rgba(199,122,131,.10), transparent 60%),
+        radial-gradient(800px 520px at 80% 80%, rgba(215,163,108,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg), #fff);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    /* Cute floating sparkles */
+    .sparkle{
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .55;
+      filter: blur(.2px);
+      background-image:
+        radial-gradient(circle at 12% 24%, rgba(215,163,108,.35) 0 2px, transparent 3px),
+        radial-gradient(circle at 34% 70%, rgba(199,122,131,.30) 0 2px, transparent 3px),
+        radial-gradient(circle at 76% 28%, rgba(215,163,108,.25) 0 2px, transparent 3px),
+        radial-gradient(circle at 68% 78%, rgba(199,122,131,.22) 0 2px, transparent 3px),
+        radial-gradient(circle at 52% 46%, rgba(215,163,108,.18) 0 1.5px, transparent 3px);
+      animation: drift 10s ease-in-out infinite alternate;
+    }
+    @keyframes drift{
+      from { transform: translateY(-6px) }
+      to   { transform: translateY(10px) }
+    }
+
+    .wrap{
+      width: min(560px, 92vw);
+      position: relative;
       perspective: 1200px;
     }
 
-    /* Gimmick 1: Falling Petals Container */
-    #petal-container {
-      position: fixed; inset: 0; pointer-events: none; z-index: 100;
-    }
-    .petal {
-      position: absolute; background: #f8edeb; border-radius: 150% 0 150% 150%;
-      opacity: 0.8; animation: fall linear forwards;
-    }
-
-    @keyframes fall {
-      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-      10% { opacity: 0.8; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-    }
-
-    /* Gimmick 2: Interactive Card */
-    .container {
-      width: 90%; max-width: 450px; z-index: 10;
-      transition: transform 0.1s ease-out;
-    }
-
-    .note-card {
-      background: white;
-      padding: 60px 40px;
-      border-radius: 4px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.08), inset 0 0 100px rgba(212, 163, 115, 0.03);
-      text-align: center;
+    /* Envelope */
+    .envelope{
       position: relative;
-      border: 1px solid rgba(0,0,0,0.03);
-      transform-style: preserve-3d;
-      opacity: 0; transform: scale(0.9) translateY(30px);
-      transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: linear-gradient(180deg, var(--envelope), var(--envelope-2));
+      border: 1px solid var(--envelope-line);
+      overflow: hidden;
+      transform: translateY(0);
+      transition: transform .6s cubic-bezier(.16,1,.3,1);
     }
 
-    .note-card.visible {
-      opacity: 1; transform: scale(1) translateY(0);
+    /* Slight paper texture */
+    .envelope::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(0,0,0,.018) 0 1px, transparent 1px 7px),
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.45), transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(255,255,255,.30), transparent 60%);
+      opacity: .45;
+      pointer-events: none;
     }
 
-    h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500; font-size: 2.2rem; margin: 0;
+    /* Envelope flap */
+    .flap{
+      position:absolute;
+      top:0; left:0; right:0;
+      height: 62%;
+      transform-origin: top center;
+      transform: rotateX(0deg);
+      transition: transform .9s cubic-bezier(.16,1,.3,1);
+      z-index: 5;
+      filter: drop-shadow(0 16px 20px rgba(0,0,0,.08));
     }
 
-    .divider {
-      width: 50px; height: 1px; background: var(--accent);
-      margin: 25px auto; opacity: 0.5;
+    .flap::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, #f7ede7, #efd8ce);
+      clip-path: polygon(0 0, 100% 0, 50% 92%);
+      border-bottom: 1px solid rgba(0,0,0,.08);
     }
 
-    p {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 1.3rem; line-height: 1.8; color: #444;
+    /* Envelope body geometry */
+    .body-shapes{
+      position:absolute;
+      inset:0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .body-shapes::before,
+    .body-shapes::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius: var(--radius);
+      opacity:.9;
+    }
+    /* Left triangle */
+    .body-shapes::before{
+      background: linear-gradient(135deg, rgba(255,255,255,.40), transparent 60%);
+      clip-path: polygon(0 100%, 0 38%, 50% 70%);
+      border-left: 1px solid rgba(0,0,0,.06);
+    }
+    /* Right triangle */
+    .body-shapes::after{
+      background: linear-gradient(225deg, rgba(255,255,255,.34), transparent 60%);
+      clip-path: polygon(100% 100%, 100% 38%, 50% 70%);
+      border-right: 1px solid rgba(0,0,0,.06);
     }
 
-    /* Gimmick 3: Handwritten Signature */
-    .signature {
-      font-family: 'Meie Script', cursive;
-      font-size: 1.8rem; color: var(--accent);
-      margin-top: 30px; opacity: 0;
-      transform: translateY(10px);
-      transition: all 1.5s ease 0.8s;
+    /* Bottom fold */
+    .bottom-fold{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height: 58%;
+      z-index: 2;
+      pointer-events:none;
     }
-    .visible .signature { opacity: 1; transform: translateY(0); }
-
-    /* The Wax Seal Toggle */
-    .overlay {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      z-index: 20; transition: all 0.6s ease;
+    .bottom-fold::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(0,0,0,.03));
+      clip-path: polygon(0 100%, 50% 35%, 100% 100%);
+      border-top: 1px solid rgba(0,0,0,.07);
     }
 
-    .wax-seal {
-      width: 90px; height: 90px;
-      background: var(--wax);
+    /* Wax seal (clickable) */
+    .seal{
+      position:absolute;
+      left:50%;
+      top: 46%;
+      transform: translate(-50%, -50%);
+      width: 92px;
+      height: 92px;
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: #f1d3d4; font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem; cursor: pointer;
-      box-shadow: 0 10px 25px rgba(166, 61, 64, 0.4);
-      border: 3px double rgba(0,0,0,0.1);
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,.18), transparent 38%),
+        radial-gradient(circle at 65% 70%, rgba(0,0,0,.14), transparent 52%),
+        radial-gradient(circle at 50% 55%, rgba(255,255,255,.08), transparent 55%),
+        linear-gradient(180deg, #a24555, var(--wax));
+      box-shadow: 0 10px 26px rgba(155,58,74,.28);
+      border: 5px double rgba(255,255,255,.18);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      z-index: 8;
+      transition: transform .25s ease, opacity .4s ease;
+      user-select: none;
+    }
+    .seal:hover{ transform: translate(-50%, -50%) scale(1.06); }
+    .seal:active{ transform: translate(-50%, -50%) scale(1.02); }
+
+    .seal span{
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      letter-spacing: .5px;
+      color: rgba(255,255,255,.92);
+      font-size: 1.9rem;
+      text-shadow: 0 2px 0 rgba(0,0,0,.18);
+    }
+
+    /* Little heart emboss on seal */
+    .seal::after{
+      content:"♥";
+      position:absolute;
+      bottom: 14px;
+      right: 16px;
+      font-size: 14px;
+      color: rgba(255,255,255,.60);
+      text-shadow: 0 1px 0 rgba(0,0,0,.12);
+    }
+
+    /* The letter that slides out */
+    .letter{
       position: relative;
+      width: min(460px, 88%);
+      margin: 0 auto;
+      transform: translateY(28%);
+      transition: transform .9s cubic-bezier(.16,1,.3,1), opacity .6s ease;
+      opacity: 0;
+      z-index: 4;
+      padding-top: 22px;
     }
 
-    .wax-seal:after {
-      content: 'Click to open';
-      position: absolute; bottom: -40px; width: 100px;
-      font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase;
-      color: var(--accent); opacity: 0.6;
+    .paper{
+      background: linear-gradient(180deg, #fffdf9, var(--paper));
+      border: 1px solid var(--paper-edge);
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+      padding: 28px 26px 20px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .wax-seal:hover { transform: scale(1.05) rotate(-5deg); }
+    .paper::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(215,163,108,.10), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(199,122,131,.10), transparent 60%),
+        repeating-linear-gradient(0deg, rgba(0,0,0,.012) 0 1px, transparent 1px 9px);
+      opacity:.55;
+      pointer-events:none;
+    }
 
-    .hidden { opacity: 0; pointer-events: none; transform: scale(1.5); }
-    
-    .copy-toast {
-      position: fixed; bottom: 30px; font-size: 0.8rem;
-      background: var(--text); color: white; padding: 8px 20px;
-      border-radius: 20px; opacity: 0; transition: opacity 0.3s;
+    .heading{
+      text-align:center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .heading .to{
+      font-family: "Parisienne", cursive;
+      font-size: 2.1rem;
+      margin: 0;
+      color: var(--ink);
+      letter-spacing: .2px;
+    }
+
+    .heading .sub{
+      margin: 8px 0 0;
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .divider{
+      width: 56px;
+      height: 1px;
+      margin: 18px auto 16px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: .9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .message{
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.35rem;
+      line-height: 1.65;
+      text-align:center;
+      color: rgba(35,35,35,.86);
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .signature{
+      margin-top: 16px;
+      text-align: center;
+      font-family: "Parisienne", cursive;
+      font-size: 1.55rem;
+      color: rgba(43,43,43,.82);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Buttons */
+    .tools{
+      display:flex;
+      justify-content:center;
+      gap: 14px;
+      margin-top: 14px;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      appearance: none;
+      border: 1px solid rgba(215,163,108,.65);
+      background: rgba(255,255,255,.65);
+      color: rgba(43,43,43,.80);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: .82rem;
+      letter-spacing: .6px;
+      cursor: pointer;
+      transition: transform .15s ease, background .25s ease, border-color .25s ease;
+      backdrop-filter: blur(8px);
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(215,163,108,.12);
+      border-color: rgba(199,122,131,.55);
+    }
+
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(199,122,131,.18), rgba(215,163,108,.12));
+      border-color: rgba(199,122,131,.55);
+    }
+
+    .hint{
+      text-align:center;
+      font-size: .82rem;
+      color: rgba(43,43,43,.55);
+      padding: 18px 16px 22px;
+      position: relative;
+      z-index: 3;
+    }
+    .hint b{ color: rgba(43,43,43,.72); font-weight: 500; }
+
+    /* Open state */
+    .is-open .flap{ transform: rotateX(-155deg); }
+    .is-open .seal{ opacity: 0; transform: translate(-50%, -50%) scale(.92); pointer-events:none; }
+    .is-open .letter{ transform: translateY(-6%); opacity: 1; }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .flap, .seal, .letter, .envelope{ transition: none !important; }
+      .sparkle{ animation: none !important; }
     }
   </style>
 </head>
 <body>
+  <div class="sparkle"></div>
 
-  <div id="petal-container"></div>
+  <div class="wrap">
+    <div class="envelope" id="envelope">
+      <div class="flap"></div>
+      <div class="body-shapes"></div>
+      <div class="bottom-fold"></div>
 
-  <div class="container" id="tilt-box">
-    <div class="overlay" id="overlay">
-      <div class="wax-seal" onclick="reveal()">J</div>
-    </div>
+      <div class="seal" id="seal" onclick="unseal()" aria-label="Unseal the envelope" title="Unseal">
+        <span>J</span>
+      </div>
 
-    <div class="note-card" id="card">
-      <h1>Rooting for you, Jimmy.</h1>
-      <div class="divider"></div>
-      <p>
-        Just a quiet note to say I'm in your corner.<br>
-        Take all the time you need.<br>
-        I'm here when you're ready to talk.
-      </p>
-      <div class="signature">With warmth, Me</div>
+      <div class="letter" id="letter" aria-hidden="true">
+        <div class="paper">
+          <div class="heading">
+            <p class="to">For Jimmy</p>
+            <p class="sub">a tiny note, sealed with love</p>
+          </div>
+
+          <div class="divider"></div>
+
+          <p class="message" id="noteText">
+            Just a gentle reminder that you’re being thought of.<br>
+            I’m rooting for you, always.<br>
+            Text me anytime — I’m in your corner.
+          </p>
+
+          <div class="signature">— always yours</div>
+
+          <div class="tools">
+            <button class="btn primary" onclick="copyNote()">Copy text</button>
+            <button class="btn" onclick="resetSeal()">Reseal</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hint" id="hint">
+        Tap the <b>wax seal</b> to open your envelope ✨
+      </div>
     </div>
   </div>
 
-  <div class="copy-toast" id="toast">Copied to clipboard</div>
-
   <script>
-    // Reveal Gimmick
-    function reveal() {
-      document.getElementById('overlay').classList.add('hidden');
-      document.getElementById('card').classList.add('visible');
-      createPetals();
+    function unseal(){
+      const env = document.getElementById('envelope');
+      const letter = document.getElementById('letter');
+      const hint = document.getElementById('hint');
+
+      env.classList.add('is-open');
+      letter.setAttribute('aria-hidden', 'false');
+      hint.style.opacity = '0';
+      setTimeout(() => (hint.style.display = 'none'), 300);
     }
 
-    // Gimmick: Petal Rain
-    function createPetals() {
-      const container = document.getElementById('petal-container');
-      for (let i = 0; i < 25; i++) {
-        const petal = document.createElement('div');
-        petal.className = 'petal';
-        const size = Math.random() * 15 + 10 + 'px';
-        petal.style.width = size;
-        petal.style.height = size;
-        petal.style.left = Math.random() * 100 + 'vw';
-        petal.style.animationDuration = Math.random() * 3 + 2 + 's';
-        petal.style.animationDelay = Math.random() * 2 + 's';
-        container.appendChild(petal);
-      }
+    function resetSeal(){
+      const env = document.getElementById('envelope');
+      const letter = document.getElementById('letter');
+      const hint = document.getElementById('hint');
+
+      env.classList.remove('is-open');
+      letter.setAttribute('aria-hidden', 'true');
+      hint.style.display = 'block';
+      hint.style.opacity = '1';
     }
 
-    // Gimmick: Mouse Parallax
-    const box = document.getElementById('tilt-box');
-    document.addEventListener('mousemove', (e) => {
-      const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-      const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-      box.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-    });
+    function copyNote(){
+      const note = document.getElementById('noteText').innerText
+        .replace(/\n\n/g, "\n")
+        .trim();
 
-    // Mobile Support: Tilt
-    window.addEventListener('deviceorientation', (e) => {
-      const rY = e.gamma / 2;
-      const rX = e.beta / 2;
-      box.style.transform = `rotateY(${rY}deg) rotateX(${rX}deg)`;
-    });
-
-    // Click card to copy
-    document.getElementById('card').onclick = () => {
-      navigator.clipboard.writeText("Rooting for you, Jimmy. I'm here when you're ready to talk.");
-      const toast = document.getElementById('toast');
-      toast.style.opacity = '1';
-      setTimeout(() => toast.style.opacity = '0', 2000);
-    };
+      navigator.clipboard.writeText(note).then(() => {
+        alert("Copied. 💌");
+      }).catch(() => {
+        alert("Couldn’t copy automatically — please copy manually. 💗");
+      });
+    }
   </script>
 </body>
 </html>
