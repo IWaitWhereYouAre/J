@@ -3,99 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rooting for you, Jimmy 💗</title>
+  <title>Rooting for you, Jimmy</title>
 
-  <!-- Fonts (cute + modern) -->
+  <!-- Classic serif + clean sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg1: #fff3fb;
-      --bg2: #f3fbff;
-      --bg3: #f7fff4;
-      --ink: #14141a;
-      --muted: rgba(20,20,26,.68);
-      --card: rgba(255,255,255,.72);
-      --stroke: rgba(20,20,26,.10);
-      --shadow: 0 18px 50px rgba(20,20,26,.12);
-      --radius: 28px;
+      --paper: #fbf7f2;
+      --paper2:#f6efe7;
+      --ink: #1a1a1f;
+      --muted: rgba(26,26,31,.62);
 
-      --pink: #ff55c8;
-      --lilac: #b48cff;
-      --sky: #7dd6ff;
-      --mint: #79f5c7;
-      --butter: #ffe08a;
+      --rose: #c66b7c;
+      --gold: #c7a46b;
+      --leaf: #7a9b86;
+
+      --card: rgba(255,255,255,.68);
+      --stroke: rgba(26,26,31,.14);
+      --shadow: 0 20px 60px rgba(20,15,10,.14);
+      --radius: 26px;
     }
 
-    *{ box-sizing: border-box; }
+    *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
       margin:0;
       color: var(--ink);
-      font-family: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background:
-        radial-gradient(900px 500px at 15% 15%, rgba(255,85,200,.22), transparent 60%),
-        radial-gradient(900px 520px at 85% 18%, rgba(125,214,255,.22), transparent 58%),
-        radial-gradient(900px 560px at 45% 90%, rgba(121,245,199,.20), transparent 60%),
-        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+        radial-gradient(900px 540px at 12% 12%, rgba(198,107,124,.12), transparent 62%),
+        radial-gradient(900px 540px at 88% 18%, rgba(199,164,107,.12), transparent 62%),
+        radial-gradient(900px 540px at 55% 90%, rgba(122,155,134,.10), transparent 62%),
+        linear-gradient(135deg, var(--paper), var(--paper2));
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       overflow-x:hidden;
     }
 
     .wrap{
-      width: min(1000px, 92vw);
+      width: min(980px, 92vw);
       margin: 0 auto;
-      padding: 28px 0 70px;
+      padding: 34px 0 78px;
       position: relative;
     }
 
-    /* soft floating blobs */
-    .blob{
-      position:absolute;
-      width: 380px; height: 380px;
-      border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
-      filter: blur(0px);
-      opacity: .55;
+    /* Subtle “vellum” grain */
+    .wrap:before{
+      content:"";
+      position: fixed;
+      inset: 0;
       pointer-events:none;
-      animation: floaty 9s ease-in-out infinite;
+      opacity: .10;
+      background-image:
+        radial-gradient(rgba(26,26,31,.25) 0.6px, transparent 0.6px);
+      background-size: 9px 9px;
       mix-blend-mode: multiply;
     }
-    .blob.one{
-      left: -150px; top: 40px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,85,200,.9), transparent 58%),
-                  radial-gradient(circle at 70% 65%, rgba(255,224,138,.85), transparent 62%);
-      animation-duration: 11s;
-    }
-    .blob.two{
-      right: -170px; top: 110px;
-      background: radial-gradient(circle at 30% 30%, rgba(180,140,255,.9), transparent 58%),
-                  radial-gradient(circle at 70% 65%, rgba(125,214,255,.85), transparent 62%);
-      animation-duration: 13s;
-    }
-    .blob.three{
-      left: 22%; bottom: -210px;
-      background: radial-gradient(circle at 35% 35%, rgba(121,245,199,.85), transparent 58%),
-                  radial-gradient(circle at 70% 65%, rgba(255,85,200,.55), transparent 62%);
-      animation-duration: 15s;
-    }
-    @keyframes floaty{
-      0%,100%{ transform: translate3d(0,0,0) rotate(0deg); }
-      50%{ transform: translate3d(0,-16px,0) rotate(2deg); }
-    }
 
-    /* header */
     header{
       display:flex;
-      align-items:center;
       justify-content:space-between;
+      align-items:center;
       gap: 12px;
-      padding: 14px 16px;
+      padding: 14px 18px;
       border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.60);
+      background: rgba(255,255,255,.55);
       border-radius: 999px;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 10px 30px rgba(20,20,26,.10);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(20,15,10,.10);
       position: sticky;
       top: 14px;
       z-index: 10;
@@ -103,311 +79,239 @@
 
     .brand{
       display:flex; align-items:center; gap: 10px;
-      font-weight: 800;
-      letter-spacing: -.2px;
+      letter-spacing: .2px;
+      font-weight: 600;
     }
-    .logo{
+    .seal{
       width: 34px; height: 34px;
-      border-radius: 14px;
-      border: 1px solid rgba(20,20,26,.12);
-      background: conic-gradient(from 200deg, rgba(255,85,200,.95), rgba(125,214,255,.95), rgba(121,245,199,.95), rgba(255,224,138,.95), rgba(255,85,200,.95));
-      box-shadow: 0 14px 28px rgba(255,85,200,.14);
+      border-radius: 999px;
+      border: 1px solid rgba(26,26,31,.18);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(198,107,124,.35), transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(199,164,107,.28), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.30));
       position: relative;
-      overflow:hidden;
+      box-shadow: 0 14px 28px rgba(198,107,124,.10);
     }
-    .logo:after{
+    .seal:after{
       content:"";
-      position:absolute; inset:-35%;
-      background: radial-gradient(circle, rgba(255,255,255,.6), transparent 55%);
-      transform: rotate(25deg);
-      opacity:.55;
+      position:absolute;
+      inset: 9px;
+      border-radius: 999px;
+      border: 1px dashed rgba(26,26,31,.22);
+      opacity:.9;
     }
 
-    .mini-pill{
-      font-family: "DM Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    .meta{
       font-size: 12px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px dashed rgba(20,20,26,.18);
-      background: rgba(255,255,255,.55);
-      color: rgba(20,20,26,.70);
+      color: rgba(26,26,31,.58);
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
       white-space: nowrap;
     }
 
-    /* hero card */
-    .hero{
-      margin-top: 20px;
+    .grid{
+      margin-top: 18px;
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 14px;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+      align-items: stretch;
     }
     @media (max-width: 900px){
-      .hero{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
     }
 
     .card{
       border: 1px solid var(--stroke);
-      background: var(--card);
+      background: rgba(255,255,255,.55);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(14px);
       overflow:hidden;
       position: relative;
     }
 
-    .main{
-      padding: 22px;
-      min-height: 420px;
+    /* Left column */
+    .left{
+      padding: 26px;
       display:flex;
       flex-direction: column;
-      justify-content: space-between;
       gap: 18px;
-    }
-
-    .kicker{
-      display:flex; align-items:center; gap: 10px;
-      color: rgba(20,20,26,.72);
-      font-weight: 700;
-      font-size: 14px;
-    }
-    .spark{
-      width: 12px; height: 12px;
-      border-radius: 5px;
-      background: conic-gradient(from 180deg, var(--pink), var(--lilac), var(--sky), var(--mint), var(--butter), var(--pink));
-      box-shadow: 0 8px 20px rgba(255,85,200,.18);
+      min-height: 460px;
+      justify-content: space-between;
     }
 
     h1{
       margin: 0;
-      font-size: clamp(34px, 4.2vw, 52px);
-      line-height: 1.02;
-      letter-spacing: -0.9px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(34px, 4.0vw, 52px);
+      line-height: 1.04;
+      letter-spacing: -0.6px;
     }
-    .soft-grad{
-      background: linear-gradient(90deg, rgba(20,20,26,.92), rgba(20,20,26,.72));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .sub{
+    .lead{
       margin: 10px 0 0;
-      max-width: 58ch;
       color: var(--muted);
       font-size: 16px;
-      line-height: 1.65;
+      line-height: 1.7;
+      max-width: 62ch;
     }
 
-    /* GIMMICK: "Dopamine Button" -> sends floating heart stickers */
+    /* Gimmick: “Seal” reveal (ONE dopamine interaction) */
     .gimmick{
       display:flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 10px;
       padding: 14px;
-      border-radius: 22px;
-      border: 1px solid rgba(20,20,26,.10);
+      border-radius: 18px;
+      border: 1px solid rgba(26,26,31,.14);
       background: rgba(255,255,255,.62);
     }
     .btn{
-      border: 1px solid rgba(20,20,26,.12);
-      background: rgba(255,255,255,.72);
-      padding: 12px 14px;
-      border-radius: 18px;
       cursor:pointer;
-      font-weight: 800;
-      letter-spacing: -.1px;
+      border: 1px solid rgba(26,26,31,.16);
+      background: rgba(255,255,255,.70);
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-weight: 600;
+      letter-spacing: .1px;
       transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
       display:inline-flex; align-items:center; gap: 10px;
       user-select:none;
     }
-    .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 30px rgba(20,20,26,.10); }
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 30px rgba(20,15,10,.10); }
     .btn.primary{
-      background: linear-gradient(90deg, rgba(255,85,200,.95), rgba(180,140,255,.88));
-      color: white;
-      border-color: rgba(255,255,255,.55);
-      box-shadow: 0 16px 34px rgba(255,85,200,.18);
+      background: linear-gradient(180deg, rgba(198,107,124,.22), rgba(255,255,255,.72));
+      border-color: rgba(198,107,124,.35);
     }
     .hint{
-      color: rgba(20,20,26,.64);
+      color: rgba(26,26,31,.62);
       font-size: 13px;
       line-height: 1.4;
     }
 
-    /* Message card (prominent message AFTER gimmick) */
-    .message{
-      padding: 22px;
-      display:flex;
-      flex-direction: column;
-      gap: 14px;
-      align-items: flex-start;
-      justify-content: center;
-      min-height: 220px;
-    }
-    .note{
-      width: 100%;
-      padding: 18px 18px;
+    /* Message “letter” */
+    .letter{
+      padding: 18px;
       border-radius: 22px;
+      border: 1px solid rgba(26,26,31,.14);
       background:
-        radial-gradient(600px 260px at 20% 20%, rgba(255,85,200,.12), transparent 60%),
-        radial-gradient(600px 260px at 80% 30%, rgba(125,214,255,.14), transparent 60%),
-        rgba(255,255,255,.72);
-      border: 1px solid rgba(20,20,26,.10);
-      box-shadow: 0 18px 40px rgba(20,20,26,.10);
+        linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.52));
       position: relative;
       overflow:hidden;
     }
-    .note:before{
+    .letter:before{
       content:"";
       position:absolute;
-      inset:-40%;
-      background: conic-gradient(from 180deg, rgba(255,85,200,.12), rgba(125,214,255,.12), rgba(121,245,199,.12), rgba(255,224,138,.12), rgba(255,85,200,.12));
-      filter: blur(18px);
-      opacity:.75;
+      left: 18px; top: 0; bottom: 0;
+      width: 1px;
+      background: rgba(198,107,124,.22);
     }
-    .note-inner{
-      position: relative;
-      z-index: 1;
-    }
+    .letter-inner{ position: relative; }
 
-    .msg{
+    .message{
       margin: 0;
-      font-size: clamp(22px, 2.4vw, 30px);
-      line-height: 1.2;
-      letter-spacing: -0.5px;
-      font-weight: 900;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(22px, 2.2vw, 30px);
+      line-height: 1.25;
     }
-    .msg small{
+    .message small{
       display:block;
-      margin-top: 10px;
-      font-weight: 700;
-      color: rgba(20,20,26,.70);
+      margin-top: 12px;
+      font-family: Inter, system-ui, sans-serif;
       font-size: 15px;
-      letter-spacing: 0px;
+      color: rgba(26,26,31,.70);
+      font-weight: 600;
     }
 
     .actions{
-      display:flex; flex-wrap: wrap; gap: 10px;
-    }
-    .btn.ghost{
-      background: rgba(255,255,255,.62);
-      font-weight: 800;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    /* Right side: “IG story preview” */
-    .side{
-      padding: 16px;
+    /* Right column: classic “note card” preview */
+    .right{
+      padding: 18px;
       display:flex;
       flex-direction: column;
       gap: 12px;
     }
-    .story{
+
+    .preview{
       border-radius: 26px;
-      border: 1px solid rgba(20,20,26,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.55));
-      box-shadow: 0 18px 50px rgba(20,20,26,.12);
+      border: 1px solid rgba(26,26,31,.14);
+      background:
+        radial-gradient(800px 320px at 20% 20%, rgba(198,107,124,.10), transparent 62%),
+        radial-gradient(800px 320px at 85% 22%, rgba(199,164,107,.10), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.48));
+      box-shadow: 0 20px 55px rgba(20,15,10,.12);
       overflow:hidden;
       position: relative;
-      aspect-ratio: 9/16;
       min-height: 420px;
-    }
-    .story .top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding: 14px 14px 0;
-      color: rgba(20,20,26,.65);
-      font-weight: 800;
-      font-size: 13px;
-    }
-    .bars{
-      display:flex; gap: 6px; align-items:center;
-    }
-    .bar{
-      width: 48px; height: 6px;
-      border-radius: 999px;
-      background: rgba(20,20,26,.10);
-      overflow:hidden;
-    }
-    .bar > i{
-      display:block; height:100%; width: 62%;
-      background: linear-gradient(90deg, rgba(255,85,200,.75), rgba(125,214,255,.75));
-      border-radius: 999px;
-    }
-
-    .story .center{
-      height: 100%;
       display:flex;
       align-items:center;
       justify-content:center;
       padding: 18px;
     }
-    .sticker-card{
+
+    .note-card{
       width: 100%;
       border-radius: 26px;
+      border: 1px solid rgba(26,26,31,.12);
+      background: rgba(255,255,255,.70);
       padding: 18px;
-      border: 1px solid rgba(20,20,26,.10);
-      background:
-        radial-gradient(circle at 25% 25%, rgba(255,85,200,.16), transparent 60%),
-        radial-gradient(circle at 70% 35%, rgba(125,214,255,.16), transparent 60%),
-        radial-gradient(circle at 55% 90%, rgba(121,245,199,.14), transparent 60%),
-        rgba(255,255,255,.75);
-      box-shadow: 0 18px 45px rgba(20,20,26,.12);
+      box-shadow: 0 18px 45px rgba(20,15,10,.10);
       position: relative;
       overflow:hidden;
-      transform: rotate(-1.4deg);
-    }
-    .sticker-card .badge{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      font-weight: 900;
-      font-size: 12px;
-      color: rgba(20,20,26,.70);
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px dashed rgba(20,20,26,.18);
-      background: rgba(255,255,255,.62);
-      margin-bottom: 10px;
-    }
-    .sticker-card .badge span{
-      width: 10px; height: 10px; border-radius: 4px;
-      background: conic-gradient(from 90deg, var(--pink), var(--lilac), var(--sky), var(--mint), var(--butter), var(--pink));
-    }
-    .sticker-card h2{
-      margin: 0;
-      font-size: 22px;
-      letter-spacing: -0.4px;
-      line-height: 1.15;
-    }
-    .sticker-card p{
-      margin: 10px 0 0;
-      color: rgba(20,20,26,.68);
-      line-height: 1.55;
-      font-weight: 700;
+      transform: rotate(-1.1deg);
     }
 
-    /* Floating stickers generated by gimmick */
-    .float-layer{
-      position: fixed;
-      inset: 0;
-      pointer-events:none;
-      overflow:hidden;
-      z-index: 999;
+    .note-card .topline{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 10px;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(26,26,31,.55);
+      font-weight: 700;
+      margin-bottom: 12px;
     }
-    .floaty{
-      position:absolute;
+    .wax{
+      display:inline-flex; align-items:center; gap: 8px;
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: rgba(198,107,124,.85);
+      box-shadow: 0 10px 18px rgba(198,107,124,.16);
+    }
+
+    .note-card h2{
+      margin: 0;
+      font-family: "Playfair Display", serif;
       font-size: 22px;
-      transform: translateY(0) scale(1);
-      opacity: 0;
-      animation: rise 1.6s ease-out forwards;
-      filter: drop-shadow(0 12px 18px rgba(20,20,26,.18));
+      letter-spacing: -0.3px;
+      line-height: 1.2;
     }
-    @keyframes rise{
-      0%{ opacity: 0; transform: translateY(10px) scale(.85); }
-      15%{ opacity: 1; }
-      100%{ opacity: 0; transform: translateY(-140px) scale(1.15); }
+    .note-card p{
+      margin: 10px 0 0;
+      color: rgba(26,26,31,.70);
+      font-weight: 600;
+      line-height: 1.6;
     }
+
+    /* Hidden flourish revealed by gimmick */
+    .flourish{
+      display:none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(26,26,31,.10);
+      color: rgba(26,26,31,.62);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .flourish.show{ display:block; }
 
     /* Toast */
     .toast{
@@ -417,126 +321,118 @@
       transform: translateX(-50%) translateY(20px);
       opacity: 0;
       background: rgba(255,255,255,.78);
-      border: 1px solid rgba(20,20,26,.10);
+      border: 1px solid rgba(26,26,31,.14);
       padding: 12px 14px;
       border-radius: 999px;
-      box-shadow: 0 16px 40px rgba(20,20,26,.14);
+      box-shadow: 0 16px 40px rgba(20,15,10,.14);
       backdrop-filter: blur(14px);
       transition: opacity .18s ease, transform .18s ease;
       display:flex; align-items:center; gap: 10px;
       z-index: 1000;
       max-width: min(92vw, 620px);
-      color: rgba(20,20,26,.78);
-      font-weight: 800;
+      color: rgba(26,26,31,.78);
+      font-weight: 700;
     }
     .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
-    .dot{
+    .toast .seal-mini{
       width: 10px; height: 10px; border-radius: 999px;
-      background: conic-gradient(from 0deg, var(--pink), var(--lilac), var(--sky), var(--mint), var(--butter), var(--pink));
+      background: linear-gradient(180deg, rgba(198,107,124,.95), rgba(199,164,107,.75));
+      box-shadow: 0 10px 18px rgba(198,107,124,.14);
     }
 
     footer{
       margin-top: 18px;
       display:flex; justify-content:space-between; gap: 12px; flex-wrap: wrap;
-      color: rgba(20,20,26,.55);
+      color: rgba(26,26,31,.55);
       font-size: 13px;
       padding: 0 2px;
     }
 
     @media (prefers-reduced-motion: reduce){
-      .blob, .floaty { animation: none !important; }
-      .btn { transition: none !important; }
+      .btn{ transition:none !important; }
     }
   </style>
 </head>
 
 <body>
-  <div class="blob one"></div>
-  <div class="blob two"></div>
-  <div class="blob three"></div>
-
   <div class="wrap">
     <header>
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>soft-note</div>
+        <div class="seal" aria-hidden="true"></div>
+        <div>lovely note</div>
       </div>
-      <div class="mini-pill">IG-story cute • screenshot-ready ✨</div>
+      <div class="meta">classic • soft • screenshot-ready</div>
     </header>
 
-    <section class="hero">
-      <!-- LEFT: Main content -->
-      <div class="card main">
+    <section class="grid">
+      <!-- LEFT -->
+      <div class="card left">
         <div>
-          <div class="kicker"><span class="spark" aria-hidden="true"></span> a tiny supportive page, but make it aesthetic</div>
-          <h1><span class="soft-grad">A soft place</span><br/>to land today.</h1>
-          <p class="sub">
-            This is playful, warm, and clean—made to be screenshot-worthy like an IG story or Pinterest post.
-            Tap the dopamine button first 👇
+          <h1>A small page<br/>with a steady heart.</h1>
+          <p class="lead">
+            Lovely, calm, and classic—like a handwritten note you’d want to keep.
+            One gentle gimmick first, then the message.
           </p>
         </div>
 
-        <!-- GIMMICK (must include, BEFORE message) -->
+        <!-- ONE dopamine gimmick -->
         <div class="gimmick" aria-label="Dopamine gimmick">
-          <button class="btn primary" id="dopamineBtn" type="button">💗 send dopamine</button>
-          <div class="hint">Little floating stickers + a cute toast. (It’s giving: comfort.)</div>
+          <button class="btn primary" id="sealBtn" type="button">🕯️ break the seal</button>
+          <div class="hint">A tiny “wax seal” reveal — soft dopamine, not loud.</div>
         </div>
 
-        <!-- PROMINENT MESSAGE (after gimmick) -->
-        <div class="message" aria-label="Support message">
-          <div class="note">
-            <div class="note-inner">
-              <p class="msg">
-                Rooting for you, Jimmy.
-                <small>Text me anytime. I’m here for you.</small>
-              </p>
+        <!-- Message (prominent, after gimmick) -->
+        <div class="letter" aria-label="Support message">
+          <div class="letter-inner">
+            <p class="message">
+              Rooting for you, Jimmy.
+              <small>Text me anytime. I’m here for you.</small>
+            </p>
+
+            <div class="flourish" id="flourish">
+              A small reminder: you don’t have to carry everything alone.
             </div>
           </div>
+        </div>
 
-          <div class="actions">
-            <button class="btn ghost" id="copyBtn" type="button">📋 copy message</button>
-            <button class="btn ghost" id="moreBtn" type="button">✨ send a little more</button>
-          </div>
+        <div class="actions">
+          <button class="btn" id="copyBtn" type="button">Copy message</button>
+          <button class="btn" id="softBtn" type="button">Add a gentle line</button>
         </div>
       </div>
 
-      <!-- RIGHT: Story preview -->
-      <aside class="card side" aria-label="Instagram story preview">
-        <div class="story">
-          <div class="top">
-            <div class="bars" aria-hidden="true">
-              <div class="bar"><i></i></div>
-              <div class="bar"><i style="width:35%"></i></div>
-              <div class="bar"><i style="width:18%"></i></div>
+      <!-- RIGHT -->
+      <aside class="card right" aria-label="Preview">
+        <div class="preview">
+          <div class="note-card">
+            <div class="topline">
+              <span class="wax"><span class="dot" aria-hidden="true"></span> wax-seal energy</span>
+              <span id="clock">00:00</span>
             </div>
-            <div id="clock">00:00</div>
+            <h2>Rooting for you, Jimmy.</h2>
+            <p>Text me anytime. I’m here for you.</p>
           </div>
+        </div>
 
-          <div class="center">
-            <div class="sticker-card">
-              <div class="badge"><span aria-hidden="true"></span> soft support club</div>
-              <h2>Rooting for you, Jimmy 💗</h2>
-              <p>Text me anytime. I’m here for you.</p>
-            </div>
-          </div>
+        <div style="color: rgba(26,26,31,.62); font-size: 13px; line-height: 1.6;">
+          Screenshot tip: capture the right-side note card, or the letter block on the left.
         </div>
       </aside>
     </section>
 
     <footer>
-      <div>Made with ✨ gentle energy ✨</div>
-      <div style="font-family: DM Mono, ui-monospace, monospace;">Tip: screenshot the story preview → right side</div>
+      <div>Made with quiet warmth.</div>
+      <div style="font-family: Inter, system-ui, sans-serif;">Customize colors in <code>:root</code></div>
     </footer>
   </div>
 
-  <div class="float-layer" id="floatLayer" aria-hidden="true"></div>
   <div class="toast" id="toast" role="status" aria-live="polite">
-    <span class="dot" aria-hidden="true"></span>
-    <span id="toastText">You just sent a little dopamine 💗</span>
+    <span class="seal-mini" aria-hidden="true"></span>
+    <span id="toastText">Seal opened.</span>
   </div>
 
   <script>
-    // Clock for story vibe
+    // clock for a “kept note” vibe
     function updateClock(){
       const d = new Date();
       const hh = String(d.getHours()).padStart(2,'0');
@@ -546,7 +442,7 @@
     updateClock();
     setInterval(updateClock, 15000);
 
-    // Toast
+    // toast
     const toast = document.getElementById('toast');
     const toastText = document.getElementById('toastText');
     function showToast(text){
@@ -556,50 +452,31 @@
       showToast._t = setTimeout(() => toast.classList.remove('show'), 2200);
     }
 
-    // Dopamine gimmick: floating sticker emojis
-    const floatLayer = document.getElementById('floatLayer');
-    const stickers = ["💗","✨","🫶","🌷","🍓","💌","🌈","🫧","🧸","😌"];
-    function rand(min,max){ return Math.random()*(max-min)+min; }
+    // gimmick: “break the seal” reveals flourish line (ONE dopamine interaction)
+    const flourish = document.getElementById('flourish');
+    let opened = false;
 
-    function popStickers(count = 18){
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-
-      for(let i=0;i<count;i++){
-        const el = document.createElement('span');
-        el.className = 'floaty';
-        el.textContent = stickers[Math.floor(Math.random()*stickers.length)];
-        el.style.left = rand(20, w-20) + 'px';
-        el.style.top  = rand(h*0.60, h*0.88) + 'px';
-        el.style.animationDuration = rand(1.2, 1.9) + 's';
-        el.style.animationDelay = rand(0, .12) + 's';
-        el.style.fontSize = rand(18, 28) + 'px';
-        floatLayer.appendChild(el);
-        el.addEventListener('animationend', () => el.remove());
-      }
-    }
-
-    // Button actions
-    document.getElementById('dopamineBtn').addEventListener('click', () => {
-      popStickers(22);
-      showToast("Dopamine delivered. You’re not alone 💗");
+    document.getElementById('sealBtn').addEventListener('click', () => {
+      opened = !opened;
+      flourish.classList.toggle('show', opened);
+      showToast(opened ? "Seal opened. A little warmth, delivered." : "Seal closed.");
     });
 
-    document.getElementById('moreBtn').addEventListener('click', () => {
-      popStickers(14);
-      showToast("If today is heavy, text me anyway 🫶");
-    });
-
-    // Copy message
-    const message = "Rooting for you, Jimmy.\nText me anytime. I’m here for you.";
+    // copy message
+    const base = "Rooting for you, Jimmy.\nText me anytime. I’m here for you.";
     document.getElementById('copyBtn').addEventListener('click', async () => {
       try{
-        await navigator.clipboard.writeText(message);
-        popStickers(10);
-        showToast("Copied. Send it to Jimmy 💌");
+        await navigator.clipboard.writeText(base);
+        showToast("Copied. Send it when you’re ready.");
       }catch(e){
-        showToast("Couldn’t copy (browser blocked). You can still highlight + copy ✨");
+        showToast("Copy blocked. You can highlight + copy manually.");
       }
+    });
+
+    // add gentle line (optional, but not a new “gimmick”)
+    document.getElementById('softBtn').addEventListener('click', () => {
+      flourish.classList.add('show');
+      showToast("Added a gentle line.");
     });
   </script>
 </body>
